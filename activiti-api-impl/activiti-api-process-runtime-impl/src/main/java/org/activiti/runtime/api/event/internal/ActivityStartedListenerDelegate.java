@@ -42,7 +42,7 @@ public class ActivityStartedListenerDelegate implements ActivitiEventListener {
         if (event instanceof ActivitiActivityEvent) {
             converter.from((ActivitiActivityEvent) event)
                     .ifPresent(convertedEvent -> {
-                        for (BPMNElementEventListener<BPMNActivityStartedEvent> listener : processRuntimeEventListeners) {
+                        for ( BPMNElementEventListener<BPMNActivityStartedEvent> listener : processRuntimeEventListeners ) {
                             listener.onEvent(convertedEvent);
                         }
                     });

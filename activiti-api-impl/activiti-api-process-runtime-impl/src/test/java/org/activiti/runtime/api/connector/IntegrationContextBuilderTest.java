@@ -39,7 +39,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 public class IntegrationContextBuilderTest {
-    
+
     private static final int PROCESS_DEFINITION_VERSION = 1;
     private static final String PARENT_PROCESS_INSTANCE_ID = "parentProcessInstanceId";
     private static final String PROCESS_DEFINITION_KEY = "processDefinitionKey";
@@ -59,19 +59,19 @@ public class IntegrationContextBuilderTest {
     @Before
     public void setUp() {
         initMocks(this);
-        
+
         ProcessEngineConfigurationImpl processEngineConfiguration = mock(ProcessEngineConfigurationImpl.class);
         Context.setProcessEngineConfiguration(processEngineConfiguration);
-        
+
         DeploymentManager deploymentManager = mock(DeploymentManager.class);
         ProcessDefinition processDefinition = mock(ProcessDefinition.class);
-        
+
         given(processEngineConfiguration.getDeploymentManager()).willReturn(deploymentManager);
         given(deploymentManager.findDeployedProcessDefinitionById(PROCESS_DEFINITION_ID)).willReturn(processDefinition);
-        
+
         given(processDefinition.getId()).willReturn(PROCESS_DEFINITION_ID);
         given(processDefinition.getKey()).willReturn(PROCESS_DEFINITION_KEY);
-        given(processDefinition.getVersion()).willReturn(PROCESS_DEFINITION_VERSION);        
+        given(processDefinition.getVersion()).willReturn(PROCESS_DEFINITION_VERSION);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class IntegrationContextBuilderTest {
         Map<String, Object> variables = Collections.singletonMap("key", "value");
         ActionDefinition actionDefinition = new ActionDefinition();
         given(inboundVariablesProvider.calculateVariables(execution,
-                                                          actionDefinition))
+                actionDefinition))
                 .willReturn(variables);
 
 
@@ -128,7 +128,7 @@ public class IntegrationContextBuilderTest {
         Map<String, Object> variables = Collections.singletonMap("key", "value");
         ActionDefinition actionDefinition = new ActionDefinition();
         given(inboundVariablesProvider.calculateVariables(execution,
-                                                          actionDefinition))
+                actionDefinition))
                 .willReturn(variables);
 
 

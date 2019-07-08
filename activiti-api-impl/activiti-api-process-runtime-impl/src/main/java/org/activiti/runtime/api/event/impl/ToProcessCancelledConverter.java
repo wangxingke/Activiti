@@ -29,8 +29,8 @@ public class ToProcessCancelledConverter implements EventConverter<ProcessCancel
         ProcessInstanceImpl processInstance = new ProcessInstanceImpl();
         processInstance.setId(internalEvent.getProcessInstanceId());
         processInstance.setProcessDefinitionId(internalEvent.getProcessDefinitionId());
-        String cause = internalEvent.getCause() !=null? internalEvent.getCause().toString() : null;
+        String cause = internalEvent.getCause() != null ? internalEvent.getCause().toString() : null;
         return Optional.of(new ProcessCancelledImpl(processInstance,
-                                                    cause));
+                cause));
     }
 }

@@ -34,9 +34,11 @@ public class ToActivityCancelledConverter implements EventConverter<BPMNActivity
     @Override
     public Optional<BPMNActivityCancelledEvent> from(ActivitiActivityEvent internalEvent) {
         BPMNActivityCancelledEventImpl bpmnActivityCancelledEvent = null;
-        if(internalEvent.getActivityId() != null && !internalEvent.getActivityId().isEmpty()){ // we are making sure that it is a BPMN Activity
+
+        if (internalEvent.getActivityId() != null && !internalEvent.getActivityId().isEmpty()) { // we are making sure that it is a BPMN Activity
             bpmnActivityCancelledEvent = new BPMNActivityCancelledEventImpl(toActivityConverter.from(internalEvent));
         }
+
         return Optional.ofNullable(bpmnActivityCancelledEvent);
     }
 }

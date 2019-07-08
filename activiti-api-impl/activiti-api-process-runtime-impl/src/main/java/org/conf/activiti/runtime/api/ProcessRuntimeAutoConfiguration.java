@@ -87,16 +87,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @AutoConfigureAfter(CommonRuntimeAutoConfiguration.class)
 public class ProcessRuntimeAutoConfiguration {
-    
+
     /**
-     * Creates default SignalPayloadEventListener bean if no existing bean found in ApplicationContext
+     * Creates default SignalPayloadEventListener bean if no existing bean found in ApplicationContext.
      */
     @Bean
     @ConditionalOnMissingBean(SignalPayloadEventListener.class)
     public SignalPayloadEventListener signalPayloadEventListener(RuntimeService runtimeService) {
         return new RuntimeSignalPayloadEventListener(runtimeService);
     }
-    
 
     @Bean
     @ConditionalOnMissingBean
@@ -142,7 +141,6 @@ public class ProcessRuntimeAutoConfiguration {
     public APIProcessInstanceConverter apiProcessInstanceConverter() {
         return new APIProcessInstanceConverter();
     }
-
 
     @Bean
     public ProcessRuntimeConfiguration processRuntimeConfiguration(@Autowired(required = false) List<ProcessRuntimeEventListener<?>> processRuntimeEventListeners,
@@ -200,8 +198,8 @@ public class ProcessRuntimeAutoConfiguration {
 
     @Bean
     public InitializingBean registerProcessUpdatedEventListenerDelegate(RuntimeService runtimeService,
-                                                                          @Autowired(required = false) List<ProcessRuntimeEventListener<ProcessUpdatedEvent>> eventListeners,
-                                                                          ToProcessUpdatedConverter converter) {
+                                                                        @Autowired(required = false) List<ProcessRuntimeEventListener<ProcessUpdatedEvent>> eventListeners,
+                                                                        ToProcessUpdatedConverter converter) {
         return () -> runtimeService.addEventListener(new ProcessUpdatedListenerDelegate(getInitializedListeners(eventListeners),
                         converter),
                 ActivitiEventType.ENTITY_UPDATED);
@@ -251,7 +249,7 @@ public class ProcessRuntimeAutoConfiguration {
     public ToActivityConverter activityConverter() {
         return new ToActivityConverter();
     }
-    
+
     @Bean
     public ToSignalConverter signalConverter() {
         return new ToSignalConverter();
@@ -283,11 +281,11 @@ public class ProcessRuntimeAutoConfiguration {
                         new ToActivityCancelledConverter(activityConverter)),
                 ActivitiEventType.ACTIVITY_CANCELLED);
     }
-    
+
     @Bean
     public InitializingBean registerActivitySignaledListenerDelegate(RuntimeService runtimeService,
-                                                                    @Autowired(required = false) List<BPMNElementEventListener<BPMNSignalReceivedEvent>> eventListeners,
-                                                                    ToSignalConverter signalConverter) {
+                                                                     @Autowired(required = false) List<BPMNElementEventListener<BPMNSignalReceivedEvent>> eventListeners,
+                                                                     ToSignalConverter signalConverter) {
         return () -> runtimeService.addEventListener(new SignalReceivedListenerDelegate(getInitializedListeners(eventListeners),
                         new ToSignalReceivedConverter(signalConverter)),
                 ActivitiEventType.ACTIVITY_SIGNALED);

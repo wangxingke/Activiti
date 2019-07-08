@@ -33,10 +33,10 @@ public class ToSignalReceivedConverter implements EventConverter<BPMNSignalRecei
 
     @Override
     public Optional<BPMNSignalReceivedEvent> from(ActivitiSignalEvent internalEvent) {
-    	BPMNSignalReceivedEventImpl event = new BPMNSignalReceivedEventImpl(toSignalConverter.from(internalEvent));
-    	event.setProcessInstanceId(internalEvent.getProcessInstanceId());
+        BPMNSignalReceivedEventImpl event = new BPMNSignalReceivedEventImpl(toSignalConverter.from(internalEvent));
+        event.setProcessInstanceId(internalEvent.getProcessInstanceId());
         event.setProcessDefinitionId(internalEvent.getProcessDefinitionId());
         return Optional.of(event);
     }
-    
+
 }

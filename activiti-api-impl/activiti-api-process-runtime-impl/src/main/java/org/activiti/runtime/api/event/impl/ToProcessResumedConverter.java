@@ -25,7 +25,7 @@ import org.activiti.runtime.api.model.impl.APIProcessInstanceConverter;
 
 import static org.activiti.runtime.api.event.impl.ActivitiEntityEventHelper.isProcessInstanceEntity;
 
-public class ToProcessResumedConverter implements EventConverter<ProcessResumedEvent, ActivitiEntityEvent>{
+public class ToProcessResumedConverter implements EventConverter<ProcessResumedEvent, ActivitiEntityEvent> {
 
     private final APIProcessInstanceConverter processInstanceConverter;
 

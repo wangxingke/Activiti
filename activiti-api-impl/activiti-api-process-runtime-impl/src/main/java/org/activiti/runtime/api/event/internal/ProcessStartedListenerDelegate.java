@@ -42,7 +42,7 @@ public class ProcessStartedListenerDelegate implements ActivitiEventListener {
         if (event instanceof ActivitiProcessStartedEvent) {
             processInstanceStartedEventConverter.from((ActivitiProcessStartedEvent) event)
                     .ifPresent(convertedEvent -> {
-                        for (ProcessRuntimeEventListener<ProcessStartedEvent> listener : listeners) {
+                        for ( ProcessRuntimeEventListener<ProcessStartedEvent> listener : listeners ) {
                             listener.onEvent(convertedEvent);
                         }
                     });

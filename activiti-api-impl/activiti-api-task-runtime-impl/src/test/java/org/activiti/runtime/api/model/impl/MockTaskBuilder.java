@@ -25,7 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Mock task builder
+ * Mock task builder.
  */
 public class MockTaskBuilder {
 

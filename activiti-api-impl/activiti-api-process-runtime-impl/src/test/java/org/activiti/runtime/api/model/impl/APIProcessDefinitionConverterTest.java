@@ -43,12 +43,14 @@ public class APIProcessDefinitionConverterTest {
     public void setUp() {
         initMocks(this);
 
-        BpmnModel model = new BpmnModel();
         Process process = new Process();
         process.setId("processKey");
+
         StartEvent startEvent = new StartEvent();
         startEvent.setFormKey("AFormKey");
         process.setInitialFlowElement(startEvent);
+
+        BpmnModel model = new BpmnModel();
         model.addProcess(process);
 
         when(repositoryService.getBpmnModel("anId")).thenReturn(model);
@@ -70,17 +72,17 @@ public class APIProcessDefinitionConverterTest {
         assertThat(convertedProcessDefinition)
                 .isNotNull()
                 .extracting(ProcessDefinition::getId,
-                            ProcessDefinition::getKey,
-                            ProcessDefinition::getName,
-                            ProcessDefinition::getDescription,
-                            ProcessDefinition::getVersion,
-                            ProcessDefinition::getFormKey)
+                        ProcessDefinition::getKey,
+                        ProcessDefinition::getName,
+                        ProcessDefinition::getDescription,
+                        ProcessDefinition::getVersion,
+                        ProcessDefinition::getFormKey)
                 .containsExactly(
-                             "anId",
-                             "processKey",
-                             "Process Name",
-                             "process description",
-                             3,
-                             "AFormKey");
+                        "anId",
+                        "processKey",
+                        "Process Name",
+                        "process description",
+                        3,
+                        "AFormKey");
     }
 }

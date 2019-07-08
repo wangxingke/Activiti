@@ -42,7 +42,7 @@ public class ProcessResumedEventListenerDelegate implements ActivitiEventListene
         if (event instanceof ActivitiEntityEvent) {
             processResumedConverter.from((ActivitiEntityEvent) event)
                     .ifPresent(convertedEvent -> {
-                        for (ProcessRuntimeEventListener<ProcessResumedEvent> listener : processRuntimeEventListeners) {
+                        for ( ProcessRuntimeEventListener<ProcessResumedEvent> listener : processRuntimeEventListeners ) {
                             listener.onEvent(convertedEvent);
                         }
                     });

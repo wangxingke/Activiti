@@ -42,10 +42,9 @@ public class CommonRuntimeAutoConfiguration {
         return new APIVariableInstanceConverter();
     }
 
-
     @Bean
     public InitializingBean registerVariableCreatedListenerDelegate(RuntimeService runtimeService,
-                                                                    @Autowired(required = false) List<VariableEventListener<VariableCreatedEvent>> listeners){
+                                                                    @Autowired(required = false) List<VariableEventListener<VariableCreatedEvent>> listeners) {
         return () -> runtimeService.addEventListener(new VariableCreatedListenerDelegate(getInitializedListeners(listeners), new ToVariableCreatedConverter()), ActivitiEventType.VARIABLE_CREATED);
     }
 
@@ -55,7 +54,7 @@ public class CommonRuntimeAutoConfiguration {
 
     @Bean
     public InitializingBean registerVariableUpdatedListenerDelegate(RuntimeService runtimeService,
-                                                                    @Autowired(required = false) List<VariableEventListener<VariableUpdatedEvent>> listeners){
+                                                                    @Autowired(required = false) List<VariableEventListener<VariableUpdatedEvent>> listeners) {
         return () -> runtimeService.addEventListener(new VariableUpdatedListenerDelegate(getInitializedListeners(listeners), new ToVariableUpdatedConverter()), ActivitiEventType.VARIABLE_UPDATED);
     }
 

@@ -53,10 +53,10 @@ public class DefaultServiceTaskBehavior extends AbstractBpmnActivityBehavior {
 
         Connector connector = getConnector(getImplementation(execution));
         IntegrationContext integrationContext = connector.apply(integrationContextBuilder.from(execution,
-                                                                                    actionDefinition));
+                actionDefinition));
 
         execution.setVariables(outboundVariablesProvider.calculateVariables(integrationContext,
-                                                                            actionDefinition));
+                actionDefinition));
 
         leave(execution);
     }
@@ -73,7 +73,7 @@ public class DefaultServiceTaskBehavior extends AbstractBpmnActivityBehavior {
 
     private Connector getConnector(String implementation) {
         return applicationContext.getBean(implementation,
-                                          Connector.class);
+                Connector.class);
     }
 
     private String getServiceTaskImplementation(DelegateExecution execution) {
@@ -82,7 +82,6 @@ public class DefaultServiceTaskBehavior extends AbstractBpmnActivityBehavior {
 
     public boolean hasConnectorBean(DelegateExecution execution) {
         String implementation = getServiceTaskImplementation(execution);
-        return applicationContext.containsBean(implementation)
-                && applicationContext.getBean(implementation) instanceof Connector;
+        return applicationContext.containsBean(implementation) && applicationContext.getBean(implementation) instanceof Connector;
     }
 }

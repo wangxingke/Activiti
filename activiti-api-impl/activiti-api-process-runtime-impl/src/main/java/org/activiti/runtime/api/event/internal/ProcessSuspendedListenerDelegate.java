@@ -42,7 +42,7 @@ public class ProcessSuspendedListenerDelegate implements ActivitiEventListener {
         if (event instanceof ActivitiEntityEvent) {
             processSuspendedConverter.from((ActivitiEntityEvent) event)
                     .ifPresent(convertedEvent -> {
-                        for (ProcessRuntimeEventListener<ProcessSuspendedEvent> listener : processRuntimeEventListeners) {
+                        for ( ProcessRuntimeEventListener<ProcessSuspendedEvent> listener : processRuntimeEventListeners ) {
                             listener.onEvent(convertedEvent);
                         }
                     });

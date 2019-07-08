@@ -42,10 +42,10 @@ public class InboundVariablesProvider {
             inboundVariables = new HashMap<>();
             connectorInputs.forEach(variableDefinition -> {
                 Object value = mappedValueProvider.calculateMappedValue(variableDefinition,
-                                                                        execution);
+                        execution);
                 if (value != null) {
                     inboundVariables.put(variableDefinition.getName(),
-                                         value);
+                            value);
                 }
             });
         }

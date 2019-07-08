@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 Alfresco, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,7 +45,7 @@ public class InboundVariableValueProvider {
             }
             if (Mapping.SourceMappingType.VARIABLE.equals(inputMapping.getType())) {
                 String name = inputMapping.getValue().toString();
-                
+
                 //This is extra check, we may search variable simply by variableName
                 org.activiti.spring.process.model.VariableDefinition processVariableDefinition = extensions.getExtensions().getPropertyByName(name);
                 if (processVariableDefinition != null) {

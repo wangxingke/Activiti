@@ -41,56 +41,56 @@ public class ProcessRuntimeImplTest {
     private ProcessRuntimeImpl processRuntime;
 
     @Mock
-    ProcessSecurityPoliciesManager securityPoliciesManager;
+    private ProcessSecurityPoliciesManager securityPoliciesManager;
 
     @Mock
     private RepositoryService repositoryService;
 
     @Mock
     private RuntimeService runtimeService;
-    
+
     @Mock
-    private  APIProcessInstanceConverter processInstanceConverter;
-    
+    private APIProcessInstanceConverter processInstanceConverter;
+
     @Before
     public void setUp() {
         initMocks(this);
         processRuntime = spy(new ProcessRuntimeImpl(repositoryService,
-                                                    null,
-                                                    runtimeService,
-                                                    securityPoliciesManager,
-                                                    processInstanceConverter,
-                                                    null,
-                                                    null,
-                                                    null));
-       doReturn(true).when(securityPoliciesManager).canWrite("processDefinitionKey");
-  
+                null,
+                runtimeService,
+                securityPoliciesManager,
+                processInstanceConverter,
+                null,
+                null,
+                null));
+        doReturn(true).when(securityPoliciesManager).canWrite("processDefinitionKey");
+
     }
 
     @Test
     public void updateShouldBeAbleToUpdateNameBusinessKey() {
         //given
+        ProcessInstanceImpl process = new ProcessInstanceImpl();
+        process.setId("processId");
+        process.setProcessDefinitionKey("processDefinitionKey");
+
+        doReturn(process).when(processRuntime).processInstance("processId");
+
+        ProcessInstanceQuery processQuery = mock(ProcessInstanceQuery.class);
+        doReturn(processQuery).when(processQuery).processInstanceId("processId");
+        doReturn(processQuery).when(runtimeService).createProcessInstanceQuery();
+
+
+        org.activiti.engine.runtime.ProcessInstance internalProcess = mock(org.activiti.engine.runtime.ProcessInstance.class);
+
+        doReturn(internalProcess).when(processQuery).singleResult();
+
         UpdateProcessPayload updateProcessPayload = ProcessPayloadBuilder.update()
                 .withProcessInstanceId("processId")
                 .withBusinessKey("businessKey")
                 .withName("name")
                 .build();
-        
-        ProcessInstanceImpl process = new ProcessInstanceImpl();
-        process.setId("processId");
-        process.setProcessDefinitionKey("processDefinitionKey");
-        
-        doReturn(process).when(processRuntime).processInstance("processId");
-        
-        ProcessInstanceQuery processQuery = mock(ProcessInstanceQuery.class);
-        doReturn(processQuery).when(processQuery).processInstanceId("processId");
-        doReturn(processQuery).when(runtimeService).createProcessInstanceQuery();
-          
-        
-        org.activiti.engine.runtime.ProcessInstance internalProcess = mock(org.activiti.engine.runtime.ProcessInstance.class);
-        
-        doReturn(internalProcess).when(processQuery).singleResult();
- 
+
         //when
         ProcessInstance updatedProcess = processRuntime.update(updateProcessPayload);
 
@@ -98,5 +98,5 @@ public class ProcessRuntimeImplTest {
         verify(runtimeService).updateBusinessKey("processId", "businessKey");
         verifyNoMoreInteractions(internalProcess);
     }
-    
+
 }

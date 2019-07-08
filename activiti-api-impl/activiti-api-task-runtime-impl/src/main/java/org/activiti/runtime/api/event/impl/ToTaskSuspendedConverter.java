@@ -40,7 +40,6 @@ public class ToTaskSuspendedConverter implements EventConverter<TaskSuspendedEve
         return Optional.ofNullable(event);
     }
 
-
     private boolean isTaskEvent(ActivitiEntityEvent internal) {
         return internal.getEntity() instanceof Task;
     }

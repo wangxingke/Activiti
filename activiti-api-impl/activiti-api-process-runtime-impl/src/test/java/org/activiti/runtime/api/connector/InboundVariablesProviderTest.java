@@ -49,18 +49,18 @@ public class InboundVariablesProviderTest {
     public void calculateVariablesShouldReturnExecutionVariablesMergedWithStaticValuesWhenActionDefinitionIsNull() {
         //given
         Map<String, Object> executionVariables = Collections.singletonMap("key",
-                                                         "value");
+                "value");
         DelegateExecution execution = mock(DelegateExecution.class);
         given(execution.getVariables()).willReturn(executionVariables);
 
         Map<String, Object> staticValues = Collections.singletonMap("myStatic",
-                                                         "st");
+                "st");
         given(mappedValueProvider.calculateStaticValues(execution))
                 .willReturn(staticValues);
 
         //when
         Map<String, Object> inboundVariables = inboundVariablesProvider.calculateVariables(execution,
-                                                                                          null);
+                null);
 
         //then
         assertThat(inboundVariables)
@@ -80,17 +80,17 @@ public class InboundVariablesProviderTest {
 
         DelegateExecution execution = mock(DelegateExecution.class);
         given(mappedValueProvider.calculateMappedValue(variableDefinition,
-                                                       execution))
+                execution))
                 .willReturn("inValue");
 
         Map<String, Object> staticValues = Collections.singletonMap("myStatic",
-                                                                    "st");
+                "st");
         given(mappedValueProvider.calculateStaticValues(execution))
                 .willReturn(staticValues);
 
         //when
         Map<String, Object> inboundVariables = inboundVariablesProvider.calculateVariables(execution,
-                                                                                          actionDefinition);
+                actionDefinition);
 
         //then
         assertThat(inboundVariables)

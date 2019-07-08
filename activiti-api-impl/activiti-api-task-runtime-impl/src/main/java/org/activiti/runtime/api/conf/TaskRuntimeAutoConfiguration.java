@@ -109,10 +109,10 @@ public class TaskRuntimeAutoConfiguration {
                                         variableInstanceConverter,
                                         taskRuntimeHelper,
                                         securityManager
-                                        
+
         );
     }
-    
+
     @Bean
     public TaskRuntimeHelper taskRuntimeHelper(TaskService taskService,
                                                APITaskConverter taskConverter,
@@ -138,7 +138,7 @@ public class TaskRuntimeAutoConfiguration {
         return new TaskRuntimeConfigurationImpl(getInitializedTaskRuntimeEventListeners(taskRuntimeEventListeners),
                                                 getInitializedTaskRuntimeEventListeners(variableEventListeners));
     }
-    
+
     @Bean
     public InitializingBean registerTaskCreatedEventListener(RuntimeService runtimeService,
                                                              @Autowired(required = false) List<TaskRuntimeEventListener<TaskCreatedEvent>> listeners,
@@ -147,7 +147,7 @@ public class TaskRuntimeAutoConfiguration {
                                                                                      taskCreatedEventConverter),
                                                      ActivitiEventType.TASK_CREATED);
     }
-    
+
     @Bean
     public InitializingBean registerTaskUpdatedEventListener(RuntimeService runtimeService,
                                                              @Autowired(required = false) List<TaskRuntimeEventListener<TaskUpdatedEvent>> listeners,
@@ -156,7 +156,6 @@ public class TaskRuntimeAutoConfiguration {
                                                                                      taskCreatedEventConverter),
                                                      ActivitiEventType.ENTITY_UPDATED);
     }
-    
 
     private <T> List<T> getInitializedTaskRuntimeEventListeners(List<T> taskRuntimeEventListeners) {
         return taskRuntimeEventListeners != null ? taskRuntimeEventListeners : Collections.emptyList();

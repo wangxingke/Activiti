@@ -42,7 +42,6 @@
     <xmlgraphics-commons.version>2.2</xmlgraphics-commons.version>
     <groovy-all.version>2.5.4</groovy-all.version>
     <checkstyle-maven-plugin.version>3.1.0</checkstyle-maven-plugin.version>
-    <rootDir>${session.executionRootDirectory}</rootDir>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -306,7 +305,7 @@
           </sourceDirectories>
           <failOnViolation>true</failOnViolation>
           <enableRulesSummary>false</enableRulesSummary>
-          <configLocation>${rootDir}/checkstyle.xml</configLocation>
+          <configLocation>./checkstyle.xml</configLocation>
         </configuration>
       </plugin>
 
@@ -320,7 +319,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${checkstyle-maven-plugin.version}</version>
         <configuration>
-          <configLocation>${rootDir}/checkstyle.xml</configLocation>
+          <configLocation>./checkstyle.xml</configLocation>
         </configuration>
       </plugin>
     </plugins>

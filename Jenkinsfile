@@ -39,8 +39,9 @@ pipeline {
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
-            sh 'mvn clean verify'
-            
+            sh 'mvn checkstyle:check'
+            sh 'mvn clean verify -Dcheckstyle.skip'
+
             sh "git add --all"
             sh "git commit -m \"Release `cat VERSION`\" --allow-empty"
             sh "git tag -fa v\$(cat VERSION) -m \"Release version \$(cat VERSION)\""

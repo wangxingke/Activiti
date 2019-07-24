@@ -34,8 +34,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  *
  * @author Josh Long
  */
+// 源码修改共 1 处
 @Configuration
-@AutoConfigureBefore(org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class)
+//@AutoConfigureBefore(org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class)
+@AutoConfigureBefore(org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class)
 public class SecurityAutoConfiguration {
 
   @Configuration
